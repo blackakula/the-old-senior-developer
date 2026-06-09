@@ -9,8 +9,10 @@
 <body>
     <header class="site-header">
         <div class="container">
-            <h1 class="site-title">The Old Senior Developer</h1>
-            <p class="site-subtitle">Reflections on code, craft, and the journey</p>
+            <a href="#" class="logo-link" onclick="goHome(); return false;">
+                <h1 class="site-title">The Old Senior Developer</h1>
+                <p class="site-subtitle">Reflections on code, craft, and the journey</p>
+            </a>
         </div>
     </header>
 
@@ -46,6 +48,18 @@
             <div class="about-content">
                 <p>I'm a senior developer with over two decades of experience building software systems. I've worked across various industries, technologies, and team structures.</p>
                 <p>My focus is on writing clean, maintainable code and helping others grow in their engineering careers.</p>
+            </div>
+        </section>
+
+        <!-- Blog Post Detail Section -->
+        <section id="post-detail" class="section">
+            <div class="post-detail-container">
+                <a href="#" class="back-link" onclick="backToBlog(); return false;">← Back to Blog</a>
+                <article class="post-full">
+                    <h2 id="post-detail-title"></h2>
+                    <div id="post-detail-date" class="post-detail-date"></div>
+                    <div id="post-detail-content" class="post-detail-content"></div>
+                </article>
             </div>
         </section>
     </main>
