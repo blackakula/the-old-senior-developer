@@ -46,14 +46,35 @@ function renderPosts() {
     });
 }
 
-// View full post (modal or expand)
+// View full post - display on page
 function viewPost(postId) {
     const post = posts.find(p => p.id === postId);
     if (!post) return;
     
-    // Simple implementation: alert with full content
-    // You can enhance this with a modal popup
-    alert(`${post.title}\n\n${post.date}\n\n${post.content}`);
+    // Populate post detail section
+    document.getElementById('post-detail-title').textContent = post.title;
+    document.getElementById('post-detail-date').textContent = post.date;
+    document.getElementById('post-detail-content').textContent = post.content;
+    
+    // Show post detail section
+    showSection('post-detail');
+    
+    // Deactivate nav links
+    document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+}
+
+// Go back to blog
+function backToBlog() {
+    showSection('blog');
+    document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+    document.querySelector('[data-section="blog"]').classList.add('active');
+}
+
+// Go home
+function goHome() {
+    showSection('home');
+    document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+    document.querySelector('[data-section="home"]').classList.add('active');
 }
 
 // Setup navigation
