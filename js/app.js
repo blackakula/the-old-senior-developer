@@ -26,8 +26,8 @@ const posts = [
 // Initialize the app
 document.addEventListener('DOMContentLoaded', function() {
     renderPosts();
-    setupNavigation();
     loadPostDetail();
+    setActiveNavLink();
 });
 
 // Render blog posts
@@ -71,22 +71,6 @@ function loadPostDetail() {
         if (postDate) postDate.textContent = post.date;
         if (postContent) postContent.textContent = post.content;
     }
-}
-
-// Setup navigation
-function setupNavigation() {
-    const navLinks = document.querySelectorAll('.nav-link');
-    
-    navLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-            const href = this.getAttribute('href');
-            window.location.href = href;
-        });
-    });
-    
-    // Set active link based on current page
-    setActiveNavLink();
 }
 
 // Set active nav link based on current page
