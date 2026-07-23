@@ -27,6 +27,7 @@ const posts = [
 document.addEventListener('DOMContentLoaded', function() {
     renderPosts();
     setupNavigation();
+    loadPostDetail();
 });
 
 // Render blog posts
@@ -52,6 +53,26 @@ function getPostById(postId) {
     return posts.find(p => p.id === parseInt(postId));
 }
 
+// Load post details on post.html page
+function loadPostDetail() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const postId = urlParams.get('id');
+    
+    if (!postId) return; // Not on post detail page
+    
+    const post = getPostById(postId);
+    if (post) {
+        document.title = `${post.title} - The Old Senior Developer`;
+        const postTitle = document.getElementById('post-title');
+        const postDate = document.getElementById('post-date');
+        const postContent = document.getElementById('post-content');
+        
+        if (postTitle) postTitle.textContent = post.title;
+        if (postDate) postDate.textContent = post.date;
+        if (postContent) postContent.textContent = post.content;
+    }
+}
+
 // Setup navigation
 function setupNavigation() {
     const navLinks = document.querySelectorAll('.nav-link');
@@ -59,14 +80,7 @@ function setupNavigation() {
     navLinks.forEach(link => {
         link.addEventListener('click', function(e) {
             e.preventDefault();
-            
             const href = this.getAttribute('href');
-            
-            // Update active state
-            navLinks.forEach(l => l.classList.remove('active'));
-            this.classList.add('active');
-            
-            // Navigate to page
             window.location.href = href;
         });
     });
@@ -99,25 +113,3 @@ function setActiveNavLink() {
         }
     });
 }
-
-// Load post details on post.html page
-window.addEventListener('DOMContentLoaded', function() {
-    const urlParams = new URLSearchParams(window.location.search);
-    const postId = urlParams.get('id');
-    
-    if (!postId) return; // Not on post detail page
-    
-    const post = getPostById(postId);
-    if (post) {
-        document.title = `${post.title} - The Old Senior Developer`;
-        const postTitle = document.getElementById('post-title');
-        const postDate = document.getElementById('post-date');
-        const postContent = document.getElementById('post-content');
-        
-        if (postTitle) postTitle.textContent = post.title;
-        if (postDate) postDate.textContent = post.date;
-        if (postContent) postContent.textContent = post.content;
-        
-        setActiveNavLink();
-    }
-});
